@@ -1,7 +1,10 @@
 const expres = require('express');
+const bcrypt = require('bcrypt-nodejs');
+const cors = require('cors');
 
 const app = expres();
 app.use(expres.json());
+app.use(cors());
 
 const database = {
     users:[
@@ -9,7 +12,7 @@ const database = {
             id:'123',
             name:'John',
             email:'john@com',
-            password:'cookies',
+            password:"cookies",
             entries: 0,
             joined: new Date()
         },
@@ -17,9 +20,16 @@ const database = {
             id:'124',
             name:'Sally',
             email:'sally@com',
-            password:'bananas',
+            password:"bananas",
             entries: 0,
             joined: new Date()
+        }
+    ],
+    login:[
+        {
+            id:'987',
+            hash:'',
+            email:'john@com'
         }
     ]
 }
@@ -39,6 +49,9 @@ app.post('/signin', (req,res)=>{
 
 app.post('/register',(req, res)=>{
     const { email, name, password } = req.body
+    bcrypt.hash(password, null, null, function(err, hash) {
+        console.log(hash)
+    });    
     database.users.push({
         id:'125',
         name: name,
@@ -79,3 +92,12 @@ app.put('/image', (req, res)=>{
 app.listen(3000, ()=> {
     console.log('app is running')
 })
+
+
+// // Load hash from your password DB.
+// bcrypt.compare("bacon", hash, function(err, res) {
+//     // res == true
+// });
+// bcrypt.compare("veggies", hash, function(err, res) {
+//     // res = false
+// });
