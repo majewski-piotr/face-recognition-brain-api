@@ -34,14 +34,14 @@ const database = {
     ]
 }
 
-app.get('/', (req,res)=>{
-    res.json(database.users)
-})
+// app.get('/', (req,res)=>{
+//     res.json(database.users)
+// })
 
 app.post('/signin', (req,res)=>{
     if (req.body.email === database.users[0].email &&
         req.body.password === database.users[0].password){
-            res.json('succes')
+            res.json(database.users[0]);
         } else {
             res.status(400).json('acces denied')
         }
@@ -85,6 +85,7 @@ app.put('/image', (req, res)=>{
             flag = true
             user.entries++
             res.json(user.entries)
+            console.log(user.entries)
         }
     }
 })
