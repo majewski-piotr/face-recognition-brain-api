@@ -39,8 +39,10 @@ const database = {
 // })
 
 app.post('/signin', (req,res)=>{
+    console.log('got it')
     if (req.body.email === database.users[0].email &&
         req.body.password === database.users[0].password){
+            console.log('sending back',database.users[0])
             res.json(database.users[0]);
         } else {
             res.status(400).json('acces denied')
