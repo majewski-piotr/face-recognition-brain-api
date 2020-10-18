@@ -26,8 +26,8 @@ app.post('/signin', (req, res)=>{SignIn.handleSignIn(req, res, db, bcrypt)});
 app.post('/register', (req, res)=>{Register.handleRegister(req, res, db, bcrypt)});
 app.get('/profile/:id', (req, res)=>{Profile.handleProfile(req,res,db)})
 app.put('/image', (req, res)=>{Image.handleImage(req,res,db)});
-app.post('/imageurl', (req, res)=>{Image.handleDeepAi(req,res)});
+app.post('/imageurl', (req, res)=>{Image.handleDeepAi(req,res   )});
 
-app.listen(3000, ()=> {
-    console.log('app is running')
+app.listen(process.env.PORT || 3000, ()=> {
+    console.log(`app is running on port ${process.env.PORT}`)
 })
