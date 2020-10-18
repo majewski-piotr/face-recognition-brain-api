@@ -21,7 +21,7 @@ const app = expres();
 app.use(expres.json());
 app.use(cors());
 
-
+app.get('/', (req, res)=> {res.send('it is working');})
 app.post('/signin', (req, res)=>{SignIn.handleSignIn(req, res, db, bcrypt)});
 app.post('/register', (req, res)=>{Register.handleRegister(req, res, db, bcrypt)});
 app.get('/profile/:id', (req, res)=>{Profile.handleProfile(req,res,db)})
